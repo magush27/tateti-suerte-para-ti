@@ -130,7 +130,7 @@ export const RandomChoicePicker = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-primary-foreground mb-4 drop-shadow-lg">
-            🎲 Selector de Opciones Aleatorio
+            TA TE TÍ
           </h1>
           <p className="text-xl text-primary-foreground/90 drop-shadow">
             ¡Agrega tus opciones y deja que el destino decida!
