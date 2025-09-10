@@ -16,13 +16,13 @@ export const RandomChoicePicker = () => {
       setOptions([...options, inputValue.trim()]);
       setInputValue("");
       toast({
-        title: "Option added!",
-        description: `"${inputValue.trim()}" has been added to your choices.`,
+        title: "¡Opción agregada!",
+        description: `"${inputValue.trim()}" ha sido agregada a tus opciones.`,
       });
     } else if (options.includes(inputValue.trim())) {
       toast({
-        title: "Duplicate option",
-        description: "This option already exists!",
+        title: "Opción duplicada",
+        description: "¡Esta opción ya existe!",
         variant: "destructive",
       });
     }
@@ -32,16 +32,16 @@ export const RandomChoicePicker = () => {
     const removedOption = options[index];
     setOptions(options.filter((_, i) => i !== index));
     toast({
-      title: "Option removed",
-      description: `"${removedOption}" has been removed.`,
+      title: "Opción eliminada",
+      description: `"${removedOption}" ha sido eliminada.`,
     });
   };
 
   const pickRandom = async () => {
     if (options.length === 0) {
       toast({
-        title: "No options available",
-        description: "Please add some options first!",
+        title: "No hay opciones disponibles",
+        description: "¡Por favor agrega algunas opciones primero!",
         variant: "destructive",
       });
       return;
@@ -69,8 +69,8 @@ export const RandomChoicePicker = () => {
         setIsSpinning(false);
         
         toast({
-          title: "Choice selected! 🎉",
-          description: `The winner is: "${options[finalIndex]}"`,
+          title: "¡Opción seleccionada! 🎉",
+          description: `El ganador es: "${options[finalIndex]}"`,
         });
       }
     }, intervalTime);
@@ -81,8 +81,8 @@ export const RandomChoicePicker = () => {
     setSelectedOption(null);
     setInputValue("");
     toast({
-      title: "All cleared!",
-      description: "Ready for new options.",
+      title: "¡Todo limpiado!",
+      description: "Listo para nuevas opciones.",
     });
   };
 
@@ -98,10 +98,10 @@ export const RandomChoicePicker = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-primary-foreground mb-4 drop-shadow-lg">
-            🎲 Random Choice Picker
+            🎲 Selector de Opciones Aleatorio
           </h1>
           <p className="text-xl text-primary-foreground/90 drop-shadow">
-            Add your options and let fate decide!
+            ¡Agrega tus opciones y deja que el destino decida!
           </p>
         </div>
 
@@ -112,7 +112,7 @@ export const RandomChoicePicker = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Enter an option..."
+              placeholder="Ingresa una opción..."
               className="flex-1 text-lg py-6 rounded-xl border-2 border-muted focus:border-primary transition-colors"
             />
             <Button
@@ -121,7 +121,7 @@ export const RandomChoicePicker = () => {
               className="px-8 py-6 text-lg rounded-xl bg-gradient-primary hover:shadow-playful transition-all duration-300 transform hover:scale-105"
             >
               <Plus className="w-5 h-5 mr-2" />
-              Add
+              Agregar
             </Button>
           </div>
         </Card>
@@ -130,7 +130,7 @@ export const RandomChoicePicker = () => {
           {/* Options List */}
           <Card className="p-6 bg-card/95 backdrop-blur-sm shadow-card border-0">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-semibold text-foreground">Your Options</h2>
+              <h2 className="text-2xl font-semibold text-foreground">Tus Opciones</h2>
               {options.length > 0 && (
                 <Button
                   onClick={clearAll}
@@ -138,7 +138,7 @@ export const RandomChoicePicker = () => {
                   size="sm"
                   className="rounded-lg"
                 >
-                  Clear All
+                  Limpiar Todo
                 </Button>
               )}
             </div>
@@ -146,8 +146,8 @@ export const RandomChoicePicker = () => {
             {options.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 <Shuffle className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg">No options yet!</p>
-                <p className="text-sm">Add some choices above to get started.</p>
+                <p className="text-lg">¡Aún no hay opciones!</p>
+                <p className="text-sm">Agrega algunas opciones arriba para comenzar.</p>
               </div>
             ) : (
               <div className="space-y-3 max-h-96 overflow-y-auto">
@@ -178,7 +178,7 @@ export const RandomChoicePicker = () => {
           {/* Selection Area */}
           <Card className="p-6 bg-card/95 backdrop-blur-sm shadow-card border-0">
             <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">
-              Random Selection
+              Selección Aleatoria
             </h2>
             
             <div className="text-center space-y-6">
@@ -195,12 +195,12 @@ export const RandomChoicePicker = () => {
                 {isSpinning ? (
                   <>
                     <Shuffle className="w-6 h-6 mr-3 animate-spin-slow" />
-                    Choosing...
+                    Eligiendo...
                   </>
                 ) : (
                   <>
                     <Shuffle className="w-6 h-6 mr-3" />
-                    Pick Random Choice!
+                    ¡Elegir Opción Aleatoria!
                   </>
                 )}
               </Button>
@@ -214,7 +214,7 @@ export const RandomChoicePicker = () => {
                     }`}
                   >
                     <div className="text-sm font-medium mb-2 opacity-90">
-                      🎉 Winner:
+                      🎉 Ganador:
                     </div>
                     <div className="text-2xl font-bold">
                       {selectedOption}
@@ -223,7 +223,7 @@ export const RandomChoicePicker = () => {
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
                     <div className="text-6xl mb-4">🎯</div>
-                    <p className="text-lg">Your choice will appear here!</p>
+                    <p className="text-lg">¡Tu elección aparecerá aquí!</p>
                   </div>
                 )}
               </div>
@@ -232,7 +232,7 @@ export const RandomChoicePicker = () => {
               <div className="text-center text-sm text-muted-foreground">
                 {options.length > 0 && (
                   <p>
-                    {options.length} option{options.length !== 1 ? "s" : ""} available
+                    {options.length} opción{options.length !== 1 ? "es" : ""} disponible{options.length !== 1 ? "s" : ""}
                   </p>
                 )}
               </div>
