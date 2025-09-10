@@ -92,7 +92,7 @@ export const RandomChoicePicker = () => {
         // Final selection - pick a random final option
         const finalIndex = Math.floor(Math.random() * options.length);
         setSelectedOption(options[finalIndex]);
-        setCurrentRhymeWord("¡MOE!");
+        setCurrentRhymeWord("¡TA TE TÍ!");
         
         setTimeout(() => {
           setIsSpinning(false);
