@@ -10,6 +10,15 @@ export const RandomChoicePicker = () => {
   const [inputValue, setInputValue] = useState("");
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
+  const [currentRhymeWord, setCurrentRhymeWord] = useState<string>("");
+
+  // Eenie meenie miny moe rhyme
+  const rhymeWords = [
+    "Eenie", "meenie", "miny", "moe",
+    "atrapa", "un", "tigre", "del", "pie",
+    "si", "grita", "déjalo", "ir",
+    "eenie", "meenie", "miny", "moe"
+  ];
 
   const addOption = () => {
     if (inputValue.trim() && !options.includes(inputValue.trim())) {
@@ -49,37 +58,59 @@ export const RandomChoicePicker = () => {
 
     setIsSpinning(true);
     setSelectedOption(null);
+    setCurrentRhymeWord("");
 
-    // Create suspense with multiple random selections
-    const spinDuration = 2000;
-    const intervalTime = 100;
-    const totalSpins = spinDuration / intervalTime;
-    let currentSpin = 0;
+    // Random starting positions for extra randomness
+    const randomStartOption = Math.floor(Math.random() * options.length);
+    const randomStartRhyme = Math.floor(Math.random() * rhymeWords.length);
+    
+    // Random timing between 150-300ms for natural feel
+    const baseInterval = 150 + Math.random() * 150;
+    const totalDuration = 2500 + Math.random() * 1500; // 2.5-4 seconds
+    const totalSteps = Math.floor(totalDuration / baseInterval);
+    
+    let currentStep = 0;
+    let currentOptionIndex = randomStartOption;
+    let currentRhymeIndex = randomStartRhyme;
 
     const spinInterval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * options.length);
-      setSelectedOption(options[randomIndex]);
-      currentSpin++;
+      // Update current option
+      setSelectedOption(options[currentOptionIndex]);
+      
+      // Update current rhyme word
+      setCurrentRhymeWord(rhymeWords[currentRhymeIndex]);
+      
+      // Move to next indices
+      currentOptionIndex = (currentOptionIndex + 1) % options.length;
+      currentRhymeIndex = (currentRhymeIndex + 1) % rhymeWords.length;
+      currentStep++;
 
-      if (currentSpin >= totalSpins) {
+      if (currentStep >= totalSteps) {
         clearInterval(spinInterval);
-        // Final selection
+        
+        // Final selection - pick a random final option
         const finalIndex = Math.floor(Math.random() * options.length);
         setSelectedOption(options[finalIndex]);
-        setIsSpinning(false);
+        setCurrentRhymeWord("¡MOE!");
         
-        toast({
-          title: "¡Opción seleccionada! 🎉",
-          description: `El ganador es: "${options[finalIndex]}"`,
-        });
+        setTimeout(() => {
+          setIsSpinning(false);
+          setCurrentRhymeWord("");
+          
+          toast({
+            title: "¡Opción seleccionada! 🎉",
+            description: `El ganador es: "${options[finalIndex]}"`,
+          });
+        }, 800);
       }
-    }, intervalTime);
+    }, baseInterval);
   };
 
   const clearAll = () => {
     setOptions([]);
     setSelectedOption(null);
     setInputValue("");
+    setCurrentRhymeWord("");
     toast({
       title: "¡Todo limpiado!",
       description: "Listo para nuevas opciones.",
@@ -204,6 +235,15 @@ export const RandomChoicePicker = () => {
                   </>
                 )}
               </Button>
+
+              {/* Rhyme Display */}
+              {isSpinning && currentRhymeWord && (
+                <div className="text-center mb-4">
+                  <div className="inline-block px-6 py-3 bg-primary/20 text-primary rounded-xl border-2 border-primary/30 animate-pulse">
+                    <span className="text-lg font-bold">{currentRhymeWord}</span>
+                  </div>
+                </div>
+              )}
 
               {/* Result Display */}
               <div className="min-h-[120px] flex items-center justify-center">
