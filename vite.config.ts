@@ -15,4 +15,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "/tateti-suerte-para-ti/",
 }));
