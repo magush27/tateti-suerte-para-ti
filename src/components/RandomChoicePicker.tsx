@@ -14,10 +14,11 @@ export const RandomChoicePicker = () => {
 
   // Eenie meenie miny moe rhyme
   const rhymeWords = [
-    "Eenie", "meenie", "miny", "moe",
-    "atrapa", "un", "tigre", "del", "pie",
-    "si", "grita", "déjalo", "ir",
-    "eenie", "meenie", "miny", "moe"
+    "Tateti", "suerte", "para", "ti",
+    "si no", "será", "para", "mi", "ta te ti",
+    "chocolate", "con", "maní", "caramelo",
+    "con", "chupetín", "una vieja", "haciendo pis",
+    "un enano", "en el jardín"
   ];
 
   const addOption = () => {
